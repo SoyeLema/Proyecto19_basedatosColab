@@ -6,12 +6,15 @@ const Formulario = () => {
     const [list, setList] = useState(BaseColaboradores);
     const [colab, setColab] = useState("");
     const [email, setEmail] = useState("");
-    const [newList, setNewlist] = useState(list)
+    const [newList, setNewlist] = useState(BaseColaboradores)
 
     //FUNCIÓN BOTÓN SUBMIT//
     const enviarFormulario = (e) => {
         e.preventDefault()
         setList([...list, {
+            id: Date.now(), nombre: colab, correo: email
+        }])
+        setNewlist([...newList, {
             id: Date.now(), nombre: colab, correo: email
         }])
     }
@@ -30,10 +33,10 @@ const Formulario = () => {
     const inputBuscar = (e) => {
         e.preventDefault()
         if (e.target.value === "") {
-            setNewlist(list);
+            setList(newList);
         } else {
-            let listaFiltrada = list.filter(c => c.nombre.includes(e.target.value));
-            setNewlist(listaFiltrada)
+            let listaFiltrada = newList.filter(c => c.nombre.includes(e.target.value));
+            setList(listaFiltrada)
         }
     }
 
